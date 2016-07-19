@@ -1,0 +1,33 @@
+Sub ListNamedRanges()
+Dim nm As Name
+Set newws = Sheets.Add
+newws.Activate
+newws.Name = Replace(newws.Name, "Sheet", "NamedRanges")
+'Labels
+Cells(9, 1) = "Name"
+Cells(9, 2) = "Refers To"
+Cells(9, 3) = "Scope"
+
+'List Ranges
+RowIdx = 10: ColIdx = 1
+    For Each nm In ThisWorkbook.Names
+        
+        If Left(nm.Name, 5) = "Sheet" Then
+            x = Split(nm.Name, "!")
+            Scope = x(0)
+            vScope = "WorkSheet"
+            rName = x(1)
+        Else
+            Scope = "Workbook"
+            vScope = Scope
+            rName = nm.Name
+        End If
+        
+        Cells(RowIdx, ColIdx) = rName: ColIdx = ColIdx + 1
+        Cells(RowIdx, ColIdx) = "'" & nm.RefersTo: ColIdx = ColIdx + 1
+        Cells(RowIdx, ColIdx) = Scope: ColIdx = ColIdx + 1
+    RowIdx = RowIdx + 1: ColIdx = 1
+    Next
+    
+newws.UsedRange.Columns.EntireColumn.AutoFit
+End Sub
