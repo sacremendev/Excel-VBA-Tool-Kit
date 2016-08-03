@@ -2,3 +2,6 @@
 虽说是很久之前的问题，但是正确的解决方法和原因如下！
 原因：系统update之后出现的问题
 解决方法：删除C:\Users\【username】\AppData\Local\Temp\Excel8.0\MSForms.exd
+
+Reference:
+http://www.excelpx.com/thread-108984-1-1.html
